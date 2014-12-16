@@ -13,6 +13,9 @@ gem 'spring',        group: :development
 
 gem 'bower-rails'
 
+# pre-populate angular cache of templates so rails doesn't have to request it
+gem 'angular-rails-templates'
+
 group :test, :development do
   gem "rspec-rails"
   gem "factory_girl_rails"
