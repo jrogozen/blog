@@ -49,9 +49,7 @@ RSpec.describe PostsController, :type => :controller do
         expect(response.status).to eq(200)
       end
 
-      it 'returns object with name key' do
-        expect(results).to have_key('name')
-      end
+      its(["name"]) { should eq("Setting Up Rails 4 & Angular") }
     end
 
     context "there is no matching postId" do
@@ -62,6 +60,33 @@ RSpec.describe PostsController, :type => :controller do
       end
 
       it "returns an error message" do
+        expect(response.status).to eq(422)
+        expect(results).to have_key('errors')
+      end
+    end
+  end
+
+  describe "POST create" do 
+    before do
+      post :create, post: { id: 1, name: name }
+    end
+
+    subject(:results) { JSON.parse(response.body) }
+
+    context "successfully creates new post" do
+      let(:name) { "Super Cool Post" }
+
+      it "should 200" do
+        expect(response.status).to eq(200)
+      end
+
+      its(["name"]) { should eq("Super Cool Post") }
+    end
+
+    context "fails to create new post" do
+      let(:name) { } 
+
+      it "errors when not given a name" do 
         expect(response.status).to eq(422)
         expect(results).to have_key('errors')
       end

@@ -18,11 +18,13 @@ gem 'angular-rails-templates'
 
 group :test, :development do
   gem "rspec-rails"
+  gem "rspec-its"
   gem "factory_girl_rails"
   gem "capybara"
   gem "database_cleaner"
   gem "selenium-webdriver"
   gem "phantomjs"
+  gem "pry-byebug"
 end
 
 gem 'foreman'

@@ -9,6 +9,13 @@ class PostsController < ApplicationController
   end
 
   def create
+    @post = Post.new(post_params)
+    if @post.valid?
+      @post.save
+      render json: @post
+    else
+      render json: {errors: "Error Creating Post"}, status: 422
+    end
   end
 
   def show
@@ -18,5 +25,11 @@ class PostsController < ApplicationController
     rescue
       render json: {errors: "No Post Found"}, status: 422
     end
+  end
+
+  private
+
+  def post_params
+    params.require(:post).permit(:name)
   end
 end
