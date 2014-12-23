@@ -92,4 +92,23 @@ RSpec.describe PostsController, :type => :controller do
       end
     end
   end
+
+  describe "PUT update" do
+    before do
+      Post.create!(name: "Rials is Cool", id: 1)
+      put :update, id: 1, post: { name: name }
+    end
+
+    subject(:results) { JSON.parse(response.body) }
+
+    context "successfully edits post" do
+      let(:name) { "Rails is Cool" }
+
+      it "should 200" do
+        expect(response.status).to eq(200)
+      end
+
+      its(["name"]) { should eq("Rails is Cool") }
+    end
+  end
 end

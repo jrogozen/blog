@@ -27,6 +27,19 @@ class PostsController < ApplicationController
     end
   end
 
+  def update
+    begin
+      @post = Post.find(params["id"])
+      if @post.update_attributes(post_params)
+        render json: @post
+      else
+        render json: {errors: "Post Did Not Update"}, status: 422
+      end
+    rescue
+      render json: {errors: "Post Not Found"}, status: 422
+    end
+  end
+
   private
 
   def post_params
