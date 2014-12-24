@@ -6,7 +6,7 @@ var app = angular.module('blog', [
   'angular-flash.flash-alert-directive'
 ]);
 
-app.config(['$routeProvider', function($routeProvider) {
+app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
   $routeProvider
   .when('/', {
     templateUrl: 'index.html',
@@ -20,5 +20,7 @@ app.config(['$routeProvider', function($routeProvider) {
   .when('/posts/:postId', {
     templateUrl: "show.html",
     controller: 'PostController'
-  })
+  });
+
+  $locationProvider.html5Mode(true);
 }]);

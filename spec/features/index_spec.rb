@@ -10,12 +10,4 @@ feature "Render homepage", js: true do
     visit '/'
     expect(page).to have_content("Testing a Rails & Angular App")
   end
-
-  scenario "correctly links to create new post" do
-    visit '/'
-    click_on "New Post"
-    expect(page).to have_content("Name")
-    expect(page).to have_content("Create")
-  end
-
 end
