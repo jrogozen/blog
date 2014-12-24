@@ -40,6 +40,16 @@ class PostsController < ApplicationController
     end
   end
 
+  def destroy
+    begin
+      @post = Post.find(params["id"])
+      Post.destroy(params["id"])
+      render json: {success: "Post Deleted"}, status: 200
+    rescue
+      render json: {errors: "Post Not Found"}, status: 422
+    end
+  end
+
   private
 
   def post_params

@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root 'home#index'
 
   scope '/api' do
-    resources :posts, only: [:index, :create, :show, :update]
+    resources :posts, only: [:index, :create, :show, :update, :destroy]
   end
 
   # The priority is based upon order of creation: first created -> highest priority.

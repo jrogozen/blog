@@ -111,4 +111,30 @@ RSpec.describe PostsController, :type => :controller do
       its(["name"]) { should eq("Rails is Cool") }
     end
   end
+
+  describe "DELETE destroy" do
+    before do
+      Post.create!(name: 'Setting Up Rails 4 & Angular', id: 1)
+      Post.create!(name: 'Testing a Rails & Angular App', id: 2)
+      delete :destroy, id: id
+    end
+
+    subject(:results) { JSON.parse(response.body) }
+
+    context "successfully deletes post" do
+      let(:id) { 1 }
+
+      it "should 200" do
+        expect(response.status).to eq(200)
+      end
+    end
+
+    context "unsuccessfully deletes post" do
+      let(:id) { 3 }
+
+      it "should 422" do
+        expect(response.status).to eq(422)
+      end
+    end
+  end
 end
