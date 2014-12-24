@@ -13,6 +13,10 @@ app.config(['$routeProvider', function($routeProvider) {
     controller: 'PostsController',
     reloadOnSearch: false
   })
+  .when('/posts/new', {
+    templateUrl: "newPost.html",
+    controller: 'PostController'
+  })
   .when('/posts/:postId', {
     templateUrl: "show.html",
     controller: 'PostController'

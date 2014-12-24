@@ -21,6 +21,7 @@ group :test, :development do
   gem "rspec-its"
   gem "factory_girl_rails"
   gem "capybara"
+  gem "capybara-webkit"
   gem "database_cleaner"
   gem "selenium-webdriver"
   gem "phantomjs"

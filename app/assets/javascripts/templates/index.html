@@ -1,16 +1,9 @@
-<header class="row">
-  <h1 class="text-center col-md-6 col-md-offset-3">All Posts</h1>
-</header>
 <section class="row">
-  <h1 class="text-center h2">Results</h1>
-  <ul class="list-unstyled">
+  <ul>
     <li ng-repeat="post in posts">
-      <section class="well col-md-6 col-md-offset-3">
-        <h1 class="h3 col-md-6 col-md-offset-3" style="margin-top: 0px;"><a href="">{{post.name}}</a></h1>
-        <div class="col-md-6">
-          <button class="btn btn-info">edit</button>
-          <button class="btn btn-danger">delete</button>
-        </div>
+      <section>
+        <h1>{{post.name}}</h1>
+        {{post.content}}
       </section>
     </li>
   </ul>
