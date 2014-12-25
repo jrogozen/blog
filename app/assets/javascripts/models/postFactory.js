@@ -10,7 +10,13 @@ app.factory('Post', ['$resource', '$location', 'flash', function($resource, $loc
   setup = function(id) {
     models.posts = post.query();
   }
-  
+
+  currentPost = function(postId) {
+    return post.get({id: postId}, function(success) {}, function(error) {
+      flash.error = 'No Post Found';
+    });
+  }
+
   addPost = function(data) {
     post.save(data, function(successResult) {
       $location.path('/posts/' + successResult.id);
@@ -25,6 +31,7 @@ app.factory('Post', ['$resource', '$location', 'flash', function($resource, $loc
     setup: setup,
     models: models,
     addPost: addPost,
-    post: post
+    post: post,
+    currentPost: currentPost
   };
 }]);
