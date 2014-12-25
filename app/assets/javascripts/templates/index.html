@@ -1,13 +1,19 @@
-<section>
-  <a ng-href="/posts/new">New Post</a>
-</section>
-<section class="row">
-  <ul>
-    <li ng-repeat="post in posts">
-      <section>
-        <h1>{{post.name}}</h1>
-        {{post.content}}
-      </section>
-    </li>
-  </ul>
-</section>
+<!-- TODO: extract navbar away -->
+<div class="container">
+  <section class="navbar row">
+    <a ng-href="/posts/new">New Post</a>
+  </section>
+</div>
+
+<div class="container">
+  <section class="row">  
+    <ul>
+      <li ng-repeat="post in posts">
+        <section>
+          <h1><a ng-href="/posts/{{post.id}}">{{post.name}}</a></h1>
+          {{post.content}}
+        </section>
+      </li>
+    </ul>
+  </section>
+</div>

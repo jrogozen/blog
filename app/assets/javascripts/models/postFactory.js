@@ -1,21 +1,23 @@
 app.factory('Post', ['$resource', '$location', 'flash', function($resource, $location, flash) {
-  var models, post, queryPosts, setup, addPost, currentPost;
+  var models, post, queryPosts, setup, addPost, currentPost, editPost;
 
   models = {};
 
   post = $resource('/api/posts/:id', { id: "@id", format: 'json' }, {
-
+    update: {
+      method: 'PUT'
+    }
   });
 
   setup = function(id) {
     models.posts = post.query();
-  }
+  };
 
   currentPost = function(postId) {
     return post.get({id: postId}, function(success) {}, function(error) {
       flash.error = 'No Post Found';
     });
-  }
+  };
 
   addPost = function(data) {
     post.save(data, function(successResult) {
@@ -25,13 +27,21 @@ app.factory('Post', ['$resource', '$location', 'flash', function($resource, $loc
         flash.error = 'Oops, you forgot to add a name for the post.';
       }
     });
-  }
+  };
+
+  editPost = function(data) {
+    post.update(data, function(successResult) {
+      $location.path('/posts/' + successResult.id);
+    }, function(errorResult) {
+      flash.error = 'Error updating post.'
+    });
+  };
 
   return {
     setup: setup,
     models: models,
     addPost: addPost,
-    post: post,
+    editPost: editPost,
     currentPost: currentPost
   };
 }]);

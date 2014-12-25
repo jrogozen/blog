@@ -10,4 +10,10 @@ feature "Render homepage", js: true do
     visit '/'
     expect(page).to have_content("Testing a Rails & Angular App")
   end
+
+  scenario "posts are linked" do
+    visit '/'
+    click_on "Setting Up Rails 4 & Angular"
+    expect(page).not_to have_content("Testing a Rails & Angular App")
+  end
 end

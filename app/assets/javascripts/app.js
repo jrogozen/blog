@@ -22,6 +22,10 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     templateUrl: "showPost.html",
     controller: 'PostController'
   })
+  .when('/posts/:id/edit', {
+    templateUrl: "editPost.html",
+    controller: 'PostController'
+  })
   .otherwise('/');
 
   $locationProvider.html5Mode(true);

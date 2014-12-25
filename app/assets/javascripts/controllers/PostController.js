@@ -8,4 +8,8 @@ app.controller("PostController", ['$scope', '$routeParams', '$resource', 'Post',
     Post.addPost(post);
   };
 
+  $scope.editPost = function(post) {
+    Post.editPost(post);
+  };
+
 }]);
