@@ -17,5 +17,9 @@
 //= require angular-resource/angular-resource
 //= require angular-flash/dist/angular-flash
 //= require angular-rails-templates
+//= require ng-rails-csrf
+//= require ./app
+//= require_tree ./models
+//= require_tree ./controllers
 //= require_tree ./templates
 //= require_tree .

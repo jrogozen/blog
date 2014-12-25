@@ -3,7 +3,8 @@ var app = angular.module('blog', [
   'ngResource',
   'templates',
   'angular-flash.service',
-  'angular-flash.flash-alert-directive'
+  'angular-flash.flash-alert-directive',
+  'ng-rails-csrf'
 ]);
 
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
@@ -17,10 +18,11 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     templateUrl: "newPost.html",
     controller: 'PostController'
   })
-  .when('/posts/:postId', {
-    templateUrl: "show.html",
+  .when('/posts/:id', {
+    templateUrl: "showPost.html",
     controller: 'PostController'
-  });
+  })
+  .otherwise('/');
 
   $locationProvider.html5Mode(true);
 }]);

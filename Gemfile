@@ -12,6 +12,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 
 gem 'bower-rails'
+gem 'ng-rails-csrf'
 
 # pre-populate angular cache of templates so rails doesn't have to request it
 gem 'angular-rails-templates'
