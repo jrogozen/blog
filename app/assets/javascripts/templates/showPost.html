@@ -6,6 +6,7 @@
     <nav class="subnav">
       <ul>
         <li><a ng-href="/posts/{{post.id}}/edit">Edit</a></li>
+        <li><a href ng-click="deletePost(post.id)">Delete</a></li>
       </ul>
     </nav>
     <h1>{{post.name}}</h1>

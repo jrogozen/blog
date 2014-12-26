@@ -1,5 +1,5 @@
 app.factory('Post', ['$resource', '$location', 'flash', function($resource, $location, flash) {
-  var models, post, queryPosts, setup, addPost, currentPost, editPost;
+  var models, post, queryPosts, setup, addPost, currentPost, editPost, deletePost;
 
   models = {};
 
@@ -29,6 +29,14 @@ app.factory('Post', ['$resource', '$location', 'flash', function($resource, $loc
     });
   };
 
+  deletePost = function(postId) {
+    post.delete({id: postId}, function(success) {
+      $location.path('/');
+    }, function(error) {
+      flash.error = "Error deleting post."
+    })
+  };
+
   editPost = function(data) {
     post.update(data, function(successResult) {
       $location.path('/posts/' + successResult.id);
@@ -42,6 +50,7 @@ app.factory('Post', ['$resource', '$location', 'flash', function($resource, $loc
     models: models,
     addPost: addPost,
     editPost: editPost,
+    deletePost: deletePost,
     currentPost: currentPost
   };
 }]);

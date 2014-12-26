@@ -12,4 +12,8 @@ app.controller("PostController", ['$scope', '$routeParams', '$resource', 'Post',
     Post.editPost(post);
   };
 
+  $scope.deletePost = function(postId) {
+    Post.deletePost(postId);
+  }
+
 }]);
