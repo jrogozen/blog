@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe PostsController, :type => :controller do
   render_views
+  
   describe "GET index" do
     before do
       Post.create!(name: 'Setting Up Rails 4 & Angular')
