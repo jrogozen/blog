@@ -39,7 +39,7 @@ RSpec.describe CategoriesController, :type => :controller do
 
     context "when there is a matching category" do
       let(:id) {1}
-      
+
       it "should 200" do
         expect(response.status).to eq(200)
       end
@@ -60,6 +60,46 @@ RSpec.describe CategoriesController, :type => :controller do
 
       it 'should not have the name key' do
         expect(results).not_to have_key('name')
+      end
+    end
+  end
+
+  describe "POST create" do
+    before do
+      post :create, category: {id: 1, name: name}
+    end
+
+    subject(:results) { JSON.parse(response.body) }
+
+    context "successfully creates a new category" do
+      let(:name) {'ruby'}
+
+      it "should 200" do
+        expect(response.status).to eq(200)
+      end
+
+      it "capitalizes the category" do
+        expect(results["name"]).to eq("Ruby")
+      end
+    end
+  end
+
+  describe "POST create duplicate check" do
+    before do
+      Category.create!(name: 'Ruby')
+
+      post :create, category: {name: 'Ruby'}
+    end
+
+    subject(:results) { JSON.parse(response.body) }
+
+    context "does not create a duplicate category" do
+      it "should 422" do
+        expect(response.status).to eq(422)
+      end
+
+      it "returns duplicate error" do
+        expect(results["errors"].first).to eq("Name has already been taken")
       end
     end
   end
