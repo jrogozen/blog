@@ -29,6 +29,13 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
+    begin
+      @category = Category.find(params[:id])
+      Category.destroy(params[:id])
+      render json: {success: "Category deleted"}, status: 200
+    rescue
+      render json: {errors: ["Category does not exist"]}, status: 422
+    end
   end
 
   private

@@ -103,4 +103,31 @@ RSpec.describe CategoriesController, :type => :controller do
       end
     end
   end
+
+  describe "DELETE destroy" do
+    before do
+      Category.create!(name: 'Ruby', id: 1)
+
+      delete :destroy, id: id
+    end
+
+    subject(:results) { JSON.parse(response.body) }
+
+    context "deletes the category" do
+      let(:id) { 1 }
+
+      it "should 200" do
+        expect(response.status).to eq(200)
+      end
+    end
+
+    context "category doesn't exit" do
+      let(:id) { 2 }
+
+      it "should 422" do
+        expect(response.status).to eq(422)
+        expect(results["errors"].first).to eq("Category does not exist")
+      end
+    end
+  end
 end
