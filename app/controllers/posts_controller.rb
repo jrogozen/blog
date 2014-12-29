@@ -14,7 +14,7 @@ class PostsController < ApplicationController
       @post.save
       render json: @post
     else
-      render json: {errors: "Error Creating Post"}, status: 422
+      render json: {errors: @post.errors.full_messages}, status: 422
     end
   end
 
@@ -53,6 +53,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:name, :content)
+    params.require(:post).permit(:name, :content, :category_id)
   end
 end

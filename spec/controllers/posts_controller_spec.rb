@@ -37,7 +37,6 @@ RSpec.describe PostsController, :type => :controller do
   describe "GET show" do
     before do
       Post.create!(id: 1, name: 'Setting Up Rails 4 & Angular')
-
       get :show, id: id
     end
 
@@ -69,7 +68,8 @@ RSpec.describe PostsController, :type => :controller do
 
   describe "POST create" do 
     before do
-      post :create, post: { id: 1, name: name }
+      Category.create!(id: 1, name: "General")
+      post :create, post: { id: 1, name: name, category_id: 1 }
     end
 
     subject(:results) { JSON.parse(response.body) }
@@ -79,6 +79,10 @@ RSpec.describe PostsController, :type => :controller do
 
       it "should 200" do
         expect(response.status).to eq(200)
+      end
+
+      it "assigns the correct category" do
+        expect(results["category_id"]).to eq(1)
       end
 
       its(["name"]) { should eq("Super Cool Post") }
@@ -96,20 +100,23 @@ RSpec.describe PostsController, :type => :controller do
 
   describe "PUT update" do
     before do
+      Category.create!(name: "Ruby", id: 1)
       Post.create!(name: "Rials is Cool", id: 1)
-      put :update, id: 1, post: { name: name }
+      put :update, id: 1, post: { name: name, category_id: category_id }
     end
 
     subject(:results) { JSON.parse(response.body) }
 
     context "successfully edits post" do
       let(:name) { "Rails is Cool" }
+      let(:category_id) { 1 }
 
       it "should 200" do
         expect(response.status).to eq(200)
       end
 
       its(["name"]) { should eq("Rails is Cool") }
+      its(["category_id"]) { should eq(1) }
     end
   end
 
