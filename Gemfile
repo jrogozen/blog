@@ -14,6 +14,9 @@ gem 'spring',        group: :development
 gem 'bower-rails'
 gem 'ng-rails-csrf'
 
+gem 'devise_token_auth'
+gem 'omniauth'
+
 # pre-populate angular cache of templates so rails doesn't have to request it
 gem 'angular-rails-templates'
 
