@@ -7,6 +7,7 @@ require 'rspec/rails'
 require 'rspec/its'
 require 'capybara/rspec'
 require 'capybara/webkit/matchers'
+Dir[File.dirname(__FILE__) + '/support/*.rb'].each {|file| require file }
 Capybara.javascript_driver = :webkit
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -40,6 +41,8 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
+
+  config.include FactoryGirl::Syntax::Methods
 
   config.before(:suite) do
     DatabaseCleaner.clean_with :truncation

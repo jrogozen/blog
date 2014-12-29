@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
-  mount_devise_token_auth_for 'User', at: '/auth'
   root 'home#index'
 
   scope '/api' do
     resources :posts, only: [:index, :create, :show, :update, :destroy]
     resources :categories, only: [:index, :create, :show, :destroy]
+    mount_devise_token_auth_for 'User', at: '/auth'
   end
 
   get '*path', to: 'home#index', format: :html

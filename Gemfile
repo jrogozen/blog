@@ -16,6 +16,9 @@ gem 'ng-rails-csrf'
 
 gem 'devise_token_auth'
 gem 'omniauth'
+gem 'omniauth-github'
+gem 'omniauth-twitter'
+gem 'figaro'
 
 # pre-populate angular cache of templates so rails doesn't have to request it
 gem 'angular-rails-templates'

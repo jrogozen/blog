@@ -16,8 +16,11 @@
 //= require angular-route/angular-route
 //= require angular-resource/angular-resource
 //= require angular-flash/dist/angular-flash
+//= require angular-cookies/angular-cookies
+//= require angular-cookie/angular-cookie
 //= require angular-rails-templates
 //= require ng-rails-csrf
+//= require ng-token-auth/dist/ng-token-auth
 //= require ./app
 //= require_tree ./models
 //= require_tree ./controllers
