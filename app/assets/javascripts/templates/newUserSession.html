@@ -1,7 +1,7 @@
 <div class="container">
   <section class="row">
-    <button ng-click="authenticate('github')">github login</button>
-    <button ng-click="try()">try</button>
+    <button class="btn btn-danger" ng-click="authenticate()">github login</button>
+    <button class="btn btn-default" ng-click="try()">try</button>
     <h1>Login</h1>
     <form ng-submit="submitLogin(loginForm)" ng-init="loginForm={}">
       <div class="form-group">

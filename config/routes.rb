@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  root 'home#index'
 
   scope '/api' do
     resources :posts, only: [:index, :create, :show, :update, :destroy]
@@ -7,7 +6,11 @@ Rails.application.routes.draw do
     mount_devise_token_auth_for 'User', at: '/auth'
   end
 
-  get '*path', to: 'home#index', format: :html
+  get "/omniauth/:provider/callback" => "devise_token_auth/omniauth_callbacks#redirect_callbacks"
+
+  root to: "home#index", anchor: false
+
+  # get '*path', to: 'home#index', format: :html
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

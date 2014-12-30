@@ -50,20 +50,15 @@ app.config(['$authProvider', function($authProvider) {
 }]);
 
 app.run(['$rootScope', '$location', function($rootScope, $location) {
-  $rootScope.$on('auth:login-success', function() {
-    // $location.path('/');
-    console.log("success");
+  $rootScope.$on('auth:login-success', function(ev) {
+    $location.path('/');
   });
-  $rootScope.$on('auth:login-error', function(ev, reason) {
-      alert('auth failed because', reason.errors[0]);
+  $rootScope.$on('auth:login-error', function(ev) {
   });
-  $rootScope.$on('auth:validation-success', function() {
-    console.log('validated');
+  $rootScope.$on('auth:validation-success', function(ev) {
   });
-  $rootScope.$on('auth:validation-error', function() {
-    console.log('not validated');
+  $rootScope.$on('auth:validation-error', function(ev) {
   });
   $rootScope.$on('auth:invalid', function(ev, reason) {
-    console.log(ev);
   });
 }]);
