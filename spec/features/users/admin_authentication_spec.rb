@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-feature 'Authentication', js: true do
+feature 'Admin authentication', js: true do
   before do
     login_data = {
       strategy: 'github',
       data: {
-        name: "Ted Mosby",
-        email: "tedmosby@gmail.com",
+        name: "Jon Rogozen",
+        email: "jon.rogozen@gmail.com",
         uid: 1337
       }
     }
@@ -26,8 +26,8 @@ feature 'Authentication', js: true do
       expect(page).to have_content("Homepage")
     end
 
-    scenario 'is not an admin' do
-      expect(page).not_to have_content("Admin Panel")
+    scenario 'expect jon.rogozen to be an admin' do
+      expect(page).to have_content("Admin Panel")
     end
   end
 end

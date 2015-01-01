@@ -41,7 +41,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
 
 app.config(['$authProvider', function($authProvider) {
   $authProvider.configure({
-    apiUrl: 'http://localhost:3000/api',
+    apiUrl: '/api',
     authProviderPaths: {
       github: '/auth/github',
       twitter: '/auth/twitter'
@@ -49,16 +49,30 @@ app.config(['$authProvider', function($authProvider) {
   });
 }]);
 
-app.run(['$rootScope', '$location', function($rootScope, $location) {
+app.run(['$rootScope', '$location', 'flash', function($rootScope, $location, flash) {
+
+  var adminRoute = function(route) {
+    return _.str.startsWith(route, '/admin');
+  }
+
   $rootScope.$on('auth:login-success', function(ev) {
+    flash.success = 'Wooho! Successfully logged in.';
     $location.path('/');
   });
+
   $rootScope.$on('auth:login-error', function(ev) {
+    flash.error = reason.errors[0];
   });
-  $rootScope.$on('auth:validation-success', function(ev) {
+
+  $rootScope.$on('$routeChangeStart', function (event, next, current) {
+    // if route requires auth and user is not logged in
+    // if (!routeClean($location.url()) && !AuthenticationService.isLoggedIn()) {
+    //   // redirect back to login
+    //   $location.path('/login');
+    // }
+    if (adminRoute($location.url())) {
+      console.log('we did it!');
+    }
   });
-  $rootScope.$on('auth:validation-error', function(ev) {
-  });
-  $rootScope.$on('auth:invalid', function(ev, reason) {
-  });
+
 }]);

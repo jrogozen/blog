@@ -21,6 +21,7 @@
 //= require angular-rails-templates
 //= require ng-rails-csrf
 //= require ng-token-auth/dist/ng-token-auth
+//= require underscore.string/lib/underscore.string.js
 //= require ./app
 //= require_tree ./models
 //= require_tree ./controllers

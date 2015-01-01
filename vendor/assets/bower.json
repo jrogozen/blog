@@ -8,6 +8,7 @@
     "bootstrap-sass-official": "latest",
     "angular-flash": "latest",
     "ng-token-auth": "latest",
-    "angular-cookies": "latest"
+    "angular-cookies": "latest",
+    "underscore.string": "latest"
   }
 }
