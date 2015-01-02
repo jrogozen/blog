@@ -1,19 +1,19 @@
 <div ng-app="blog">
   <div class="view-container">
-  <div class="container">
-    <section class="row">
-      <div flash-alert active-class="in alert" class="fade">
-        <span class="alert-message">{{flash.message}}</span>
-      </div>
-    </section>
-    <section class="row">
-      <ul class="list-unstyled">
-        <li ng-show="!user.id"><a class="btn btn-defualt" ng-href="/sign_in">Sign in</a></li>
-        <li ng-show="user.id"><a class="btn btn-default" ng-click='signOut()'>Sign out</a></li>
-      </ul>
-    </section>
-  </div>
-  
+    <div class="container">
+      <section class="row">
+        <div flash-alert active-class="in alert" class="fade">
+          <span class="alert-message">{{flash.message}}</span>
+        </div>
+      </section>
+      <section class="row">
+        <ul class="list-unstyled">
+          <li ng-show="!user.id"><a class="btn btn-defualt" ng-href="/sign_in">Sign in</a></li>
+          <li ng-show="user.id"><a class="btn btn-default" ng-click='signOut()'>Sign out</a></li>
+          <li ng-show="user.admin"><a class="btn btn-default" ng-href="/admin">Admin Panel</a></li>
+        </ul>
+      </section>
+    </div>
     <div ng-view class="view-frame animate-view"></div>
   </div>
 </div>

@@ -32,6 +32,14 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     templateUrl: "newUserSession.html",
     controller: "UserSessionsController"
   })
+  .when('/admin', {
+    templateUrl: "admin.html",
+    resolve: {
+      auth: function($auth) {
+        return $auth.validateUser();
+      }
+    }
+  })
   .otherwise('/');
 
   $locationProvider.html5Mode(true);
@@ -49,10 +57,20 @@ app.config(['$authProvider', function($authProvider) {
   });
 }]);
 
-app.run(['$rootScope', '$location', 'flash', function($rootScope, $location, flash) {
+app.run(['$rootScope', '$location', '$auth', '$q', 'flash', 'User', function($rootScope, $location, $auth, $q, flash, User) {
 
   var adminRoute = function(route) {
     return _.str.startsWith(route, '/admin');
+  }
+
+  var isAdmin = function() {
+    var user = $rootScope.user;
+
+    if (user.admin) {
+      return true;
+    }
+
+    return false;
   }
 
   $rootScope.$on('auth:login-success', function(ev) {
@@ -64,14 +82,21 @@ app.run(['$rootScope', '$location', 'flash', function($rootScope, $location, fla
     flash.error = reason.errors[0];
   });
 
-  $rootScope.$on('$routeChangeStart', function (event, next, current) {
-    // if route requires auth and user is not logged in
-    // if (!routeClean($location.url()) && !AuthenticationService.isLoggedIn()) {
-    //   // redirect back to login
-    //   $location.path('/login');
-    // }
+  $rootScope.$on('$routeChangeStart', function (ev, next, current) {
+    
+  });
+
+  $rootScope.$on('$routeChangeSuccess', function (ev, next, current) {
+    if (adminRoute($location.url()) && !isAdmin()) {
+      flash.error = "You must be an administrator to access that page."
+      $location.path('/')
+    }
+  });
+
+  $rootScope.$on('$routeChangeError', function (ev, next, current) {
     if (adminRoute($location.url())) {
-      console.log('we did it!');
+      flash.error = "Please login."
+      $location.path('/sign_in');
     }
   });
 

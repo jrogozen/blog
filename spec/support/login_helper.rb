@@ -12,5 +12,4 @@ class AuthHelper
       }
     })
   end
-
 end

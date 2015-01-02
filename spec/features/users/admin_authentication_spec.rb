@@ -7,7 +7,8 @@ feature 'Admin authentication', js: true do
       data: {
         name: "Jon Rogozen",
         email: "jon.rogozen@gmail.com",
-        uid: 1337
+        uid: 1337,
+        admin: true
       }
     }
 
