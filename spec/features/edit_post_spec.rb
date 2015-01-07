@@ -12,7 +12,6 @@ feature "Edit post", js: true do
     }
 
     mock_login(login_data)
-
     adminify(User.first)
         
     Post.create!(name: 'Setting Up Rails 4 & Angular')

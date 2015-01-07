@@ -22,4 +22,13 @@ module AuthHelper
     user.admin = true
     user.save
   end
+
+  def mock_controller_headers
+    @request.env["devise.mapping"] = Devise.mappings[:user]
+    @resource     = FactoryGirl.create(:confirmed_admin_user)
+    @auth_headers = @resource.create_new_auth_token
+    @client_id    = @auth_headers['client']
+    age_token(@resource, @client_id)
+    request.headers.merge!(@auth_headers) 
+  end
 end

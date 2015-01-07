@@ -10,8 +10,8 @@ feature "Create new post", js: true do
         uid: 1337
       }
     }
+    
     mock_login(login_data)
-
     adminify(User.first)
   end
 

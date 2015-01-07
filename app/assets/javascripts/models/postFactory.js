@@ -30,8 +30,11 @@ app.factory('Post', ['$resource', '$location', 'flash', function($resource, $loc
   };
 
   deletePost = function(postId) {
-    post.delete({id: postId}, function(success) {
+    post.delete({id: postId}, function(successResult) {
       $location.path('/');
+      flash.success = "Post deleted succesffully."
+    }, function(errorResult) {
+      flash.error = "Error deleting post.";
     });
   };
 
@@ -39,6 +42,8 @@ app.factory('Post', ['$resource', '$location', 'flash', function($resource, $loc
     post.update(data, function(successResult) {
       $location.path('/posts/' + successResult.id);
       flash.success = "Post successfully updated."
+    }, function(errorResult) {
+      flash.error = "Error updating post.";
     });
   };
 

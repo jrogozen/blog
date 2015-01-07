@@ -3,6 +3,10 @@ require 'rails_helper'
 RSpec.describe CategoriesController, :type => :controller do
   render_views
 
+  before(:each) do
+    mock_controller_headers
+  end
+
   describe "GET index" do
     before do
       Category.create!(name: 'Javascript', id: 1)

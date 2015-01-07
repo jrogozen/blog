@@ -10,13 +10,13 @@ feature "Delete post", js: true do
         uid: 1337
       }
     }
-    mock_login(login_data)
     
+    mock_login(login_data)
     adminify(User.first)
 
     Post.create!(name: 'Setting Up Rails 4 & Angular')
   end
-  
+
   scenario "Deletes post" do
     click_on 'Setting Up Rails 4 & Angular'
     click_on 'Delete'
