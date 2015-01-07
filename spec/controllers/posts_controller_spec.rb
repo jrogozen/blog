@@ -2,6 +2,17 @@ require 'rails_helper'
 
 RSpec.describe PostsController, :type => :controller do
   render_views
+
+  before(:each) do
+    @request.env["devise.mapping"] = Devise.mappings[:user]
+    @resource     = FactoryGirl.create(:confirmed_admin_user)
+    @auth_headers = @resource.create_new_auth_token
+    @token        = @auth_headers['access-token']
+    @client_id    = @auth_headers['client']
+    @expiry       = @auth_headers['expiry']
+    age_token(@resource, @client_id)
+    request.headers.merge!(@auth_headers) 
+  end
   
   describe "GET index" do
     before do

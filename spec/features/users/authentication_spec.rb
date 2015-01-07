@@ -11,10 +11,7 @@ feature 'Authentication', js: true do
       }
     }
 
-    AuthHelper.login(login_data)
-
-    visit '/sign_in'
-    find("button", text: "github login").click
+    mock_login(login_data)
   end
 
   feature 'login' do

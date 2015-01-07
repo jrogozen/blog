@@ -7,15 +7,12 @@ feature 'Admin authentication', js: true do
       data: {
         name: "Jon Rogozen",
         email: "jon.rogozen@gmail.com",
-        uid: 1337,
-        admin: true
+        uid: 1337
       }
     }
 
-    AuthHelper.login(login_data)
-
-    visit '/sign_in'
-    find("button", text: "github login").click
+    mock_login(login_data)
+    adminify(User.first)
   end
 
   feature 'login' do

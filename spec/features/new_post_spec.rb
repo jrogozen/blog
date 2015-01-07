@@ -1,8 +1,21 @@
 require 'rails_helper'
 
 feature "Create new post", js: true do
+  before do
+    login_data = {
+      strategy: 'github',
+      data: {
+        name: "Jon Rogozen",
+        email: "jon.rogozen@gmail.com",
+        uid: 1337
+      }
+    }
+    mock_login(login_data)
+
+    adminify(User.first)
+  end
+
   scenario "redirects to new post" do
-    visit '/'
     click_on 'New Post'
     fill_in "name", with: "Testing is Fun"
     fill_in "content", with: "An app without testing is like milk tea without boba."
@@ -12,7 +25,6 @@ feature "Create new post", js: true do
   end
 
   scenario "errors if post has no name" do
-    visit '/'
     click_on 'New Post'
     fill_in "content", with: "this won't work"
     click_on "Create"

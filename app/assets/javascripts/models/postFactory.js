@@ -32,16 +32,13 @@ app.factory('Post', ['$resource', '$location', 'flash', function($resource, $loc
   deletePost = function(postId) {
     post.delete({id: postId}, function(success) {
       $location.path('/');
-    }, function(error) {
-      flash.error = "Error deleting post."
-    })
+    });
   };
 
   editPost = function(data) {
     post.update(data, function(successResult) {
       $location.path('/posts/' + successResult.id);
-    }, function(errorResult) {
-      flash.error = 'Error updating post.'
+      flash.success = "Post successfully updated."
     });
   };
 

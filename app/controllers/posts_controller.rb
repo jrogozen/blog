@@ -9,12 +9,16 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
-    if @post.valid?
-      @post.save
-      render json: @post
+    if current_user && current_user.admin
+      @post = Post.new(post_params)
+      if @post.valid?
+        @post.save
+        render json: @post
+      else
+        render json: {errors: @post.errors.full_messages}, status: 422
+      end
     else
-      render json: {errors: @post.errors.full_messages}, status: 422
+      render json: {errors: "Only admins can do this"}, status: 422
     end
   end
 
@@ -28,25 +32,34 @@ class PostsController < ApplicationController
   end
 
   def update
-    begin
-      @post = Post.find(params["id"])
-      if @post.update_attributes(post_params)
-        render json: @post
-      else
-        render json: {errors: "Post Did Not Update"}, status: 422
+    if current_user && current_user.admin
+      begin
+        @post = Post.find(params["id"])
+        if @post.update_attributes(post_params)
+          render json: @post
+        else
+          binding.pry
+          render json: {errors: "Post Did Not Update"}, status: 422
+        end
+      rescue
+        render json: {errors: "Post Not Found"}, status: 422
       end
-    rescue
-      render json: {errors: "Post Not Found"}, status: 422
+    else
+      render json: {errors: "Only admins can do this"}, status: 422
     end
   end
 
   def destroy
-    begin
-      @post = Post.find(params["id"])
-      Post.destroy(params["id"])
-      render json: {success: "Post Deleted"}, status: 200
-    rescue
-      render json: {errors: "Post Not Found"}, status: 422
+    if current_user && current_user.admin
+      begin
+        @post = Post.find(params["id"])
+        Post.destroy(params["id"])
+        render json: {success: "Post Deleted"}, status: 200
+      rescue
+        render json: {errors: "Post Not Found"}, status: 422
+      end
+    else
+      render json: {errors: "Onl admins can do this"}, status: 422
     end
   end
 
