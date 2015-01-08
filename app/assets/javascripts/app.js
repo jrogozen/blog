@@ -18,7 +18,12 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
   })
   .when('/posts/new', {
     templateUrl: "newPost.html",
-    controller: 'PostController'
+    controller: 'PostController',
+    resolve: {
+      auth: function($auth) {
+        return $auth.validateUser();
+      }
+    }
   })
   .when('/posts/:id', {
     templateUrl: "showPost.html",
@@ -26,7 +31,12 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
   })
   .when('/posts/:id/edit', {
     templateUrl: "editPost.html",
-    controller: 'PostController'
+    controller: 'PostController',
+    resolve: {
+      auth: function($auth) {
+        return $auth.validateUser();
+      }
+    }
   })
   .when('/sign_in', {
     templateUrl: "newUserSession.html",

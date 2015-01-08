@@ -1,12 +1,18 @@
 <div class="container">
   <section class="row">
-    <nav class="subnav">
-      <ul>
+    <nav ng-show="user.admin" class="admin-local-nav">
+      <ul class="list-unstyled">
         <li><a ng-href="/posts/{{post.id}}/edit">Edit</a></li>
         <li><a href ng-click="deletePost(post.id)">Delete</a></li>
       </ul>
     </nav>
-    <h1>{{post.name}}</h1>
-    {{post.content}}
+
+    <section class="post-container">
+      <h1>{{post.name}}</h1>
+      <p class="category">posted in {{post.category}}</p>
+      <article class="post-content">
+        {{post.content}}
+      </article>
+    </div>
   </section>
 </div>
