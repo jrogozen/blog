@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
   
   scope '/api' do
+    get "/categories/getdefault", to: "categories#get_default"
+    
     resources :posts, only: [:index, :create, :show, :update, :destroy]
     resources :categories, only: [:index, :create, :show, :destroy]
+
     mount_devise_token_auth_for 'User', at: '/auth'
   end
 

@@ -106,7 +106,7 @@ app.run(['$rootScope', '$location', '$auth', '$q', 'flash', 'User', function($ro
   });
 
   $rootScope.$on('auth:login-error', function(ev) {
-    flash.error = reason.errors[0];
+    flash.error = ev.errors[0];
   });
 
   $rootScope.$on('$routeChangeStart', function (ev, next, current) {

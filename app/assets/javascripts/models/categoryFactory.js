@@ -1,9 +1,14 @@
 app.factory('Category', ['$resource', '$location', 'flash', function($resource, $location, flash) {
-  var models, category, setup;
+  var models, category, setup, addCategory, deleteCategory, getCategory, getDefaultId;
 
   models = {};
 
   category = $resource('/api/categories/:id', { id: "@id", format: 'json' }, {
+    defaultId: {
+      isArray: false,
+      method: 'GET',
+      url: '/api/categories/getdefault'
+    }
   });
 
   setup = function(id) {
@@ -28,9 +33,19 @@ app.factory('Category', ['$resource', '$location', 'flash', function($resource, 
   //   });
   // };
 
+  getCategory = function(catId) {
+    return category.get({id: catId});
+  }
+
+  getDefaultId = function() {
+    return category.defaultId();
+  }
+
   return {
     setup: setup,
     models: models,
-    addCategory: addCategory
+    addCategory: addCategory,
+    getCategory: getCategory,
+    getDefaultId: getDefaultId
   };
 }]);

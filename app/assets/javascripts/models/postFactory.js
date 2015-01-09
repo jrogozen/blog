@@ -1,4 +1,4 @@
-app.factory('Post', ['$resource', '$location', 'flash', function($resource, $location, flash) {
+app.factory('Post', ['$resource', '$location', 'flash', 'Category', function($resource, $location, flash, Category) {
   var models, post, queryPosts, setup, addPost, currentPost, editPost, deletePost;
 
   models = {};
@@ -14,7 +14,11 @@ app.factory('Post', ['$resource', '$location', 'flash', function($resource, $loc
   };
 
   currentPost = function(postId) {
-    return post.get({id: postId}, function(success) {}, function(error) {
+    return post.get({id: postId}, function(success) {
+      if (success.category_id) {
+        success.category = Category.getCategory(success.category_id);
+      }
+    }, function(error) {
       flash.error = 'No Post Found';
     });
   };

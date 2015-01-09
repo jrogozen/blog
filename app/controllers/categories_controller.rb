@@ -46,6 +46,15 @@ class CategoriesController < ApplicationController
     end
   end
 
+  def get_default
+    begin
+      @category = Category.find_by(name: "General")
+      render json: @category
+    rescue
+      render json: {errors: @category.errors.full_messages}, status: 422
+    end
+  end
+
   private
 
   def category_params
