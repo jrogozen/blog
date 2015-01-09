@@ -1,19 +1,14 @@
 module AuthHelper
   include Capybara::DSL
 
-  def mock_login(mock_login)
-
-    strategy = mock_login[:strategy]
-
-    OmniAuth.config.add_mock(strategy.to_sym, {
-      :uid => mock_login[:data][:uid].to_s,
-      :admin => mock_login[:data][:admin],
+  def mock_login
+    OmniAuth.config.add_mock(:github, {
+      :uid => "1337",
       :info => {
-        :name => mock_login[:data][:name],
-        :email => mock_login[:data][:email]
+        :name => "Jon Rogozen",
+        :email => "jonrogozen@gmail.com"
       }
     })
-
     visit "/sign_in"
     find("button", text: "github login").click
   end

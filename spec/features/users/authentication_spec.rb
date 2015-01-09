@@ -2,16 +2,7 @@ require 'rails_helper'
 
 feature 'Authentication', js: true do
   before do
-    login_data = {
-      strategy: 'github',
-      data: {
-        name: "Ted Mosby",
-        email: "tedmosby@gmail.com",
-        uid: 1337
-      }
-    }
-
-    mock_login(login_data)
+    mock_login
   end
 
   feature 'login' do

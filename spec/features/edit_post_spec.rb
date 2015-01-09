@@ -2,16 +2,7 @@ require 'rails_helper'
 
 feature "Edit post", js: true do
   before do
-    login_data = {
-      strategy: 'github',
-      data: {
-        name: "Jon Rogozen",
-        email: "jon.rogozen@gmail.com",
-        uid: 1337
-      }
-    }
-
-    mock_login(login_data)
+    mock_login
     adminify(User.first)
         
     Post.create!(name: 'Setting Up Rails 4 & Angular')

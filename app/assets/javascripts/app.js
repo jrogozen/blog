@@ -38,6 +38,23 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
       }
     }
   })
+  .when('/categories', {
+    templateUrl: "categories.html",
+    controller: 'CategoriesController'
+  })
+  .when('/categories/new', {
+    templateUrl: "newCategory.html",
+    controller: "CategoryController",
+    resolve: {
+      auth: function($auth) {
+        return $auth.validateUser();
+      }
+    }
+  })
+  // .when('/categories/:id', {
+  //   templateUrl: "showCategory.html",
+  //   controller: "CategoryController"
+  // })
   .when('/sign_in', {
     templateUrl: "newUserSession.html",
     controller: "UserSessionsController"

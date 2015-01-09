@@ -1,0 +1,15 @@
+<div class="container">
+  <section class="row"> 
+    <section class="content">
+      <h1>All Categories</h1>
+      <ul>
+        <li ng-repeat="category in categories">
+          <article class="article-content">
+            <h2><a ng-href="/categories/{{category.id}}">{{category.name}}</a></h2>
+            {{category.content}}
+          </article>
+        </li>
+      </ul> 
+    </section>
+  </section>
+</div>

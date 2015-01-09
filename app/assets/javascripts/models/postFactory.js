@@ -23,9 +23,7 @@ app.factory('Post', ['$resource', '$location', 'flash', function($resource, $loc
     post.save(data, function(successResult) {
       $location.path('/posts/' + successResult.id);
     }, function(errorResult) {
-      if (errorResult.status === 422) {
-        flash.error = 'Oops, you forgot to add a name for the post.';
-      }
+      flash.error = errorResult.data.errors.join(", ")
     });
   };
 
@@ -34,7 +32,7 @@ app.factory('Post', ['$resource', '$location', 'flash', function($resource, $loc
       $location.path('/');
       flash.success = "Post deleted succesffully."
     }, function(errorResult) {
-      flash.error = "Error deleting post.";
+      flash.error = errorResult.data.errors.join(", ")
     });
   };
 
@@ -43,7 +41,7 @@ app.factory('Post', ['$resource', '$location', 'flash', function($resource, $loc
       $location.path('/posts/' + successResult.id);
       flash.success = "Post successfully updated."
     }, function(errorResult) {
-      flash.error = "Error updating post.";
+      flash.error = errorResult.data.errors.join(", ")
     });
   };
 

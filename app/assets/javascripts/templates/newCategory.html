@@ -1,0 +1,12 @@
+<div class="container">
+  <section class="row">
+    <h1>Add New Category</h1>
+    <form ng-submit="addCategory(cat)">
+      <div class="form-group">
+        <label for="name">Category Name</label>
+        <input type="text" class="form-control" id="name" ng-model="cat.name">
+      </div>
+      <button type="submit" id="create" class="btn btn-default">Create</button>
+    </form>
+  </section>
+</div>

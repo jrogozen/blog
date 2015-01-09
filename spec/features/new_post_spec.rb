@@ -2,16 +2,7 @@ require 'rails_helper'
 
 feature "Create new post", js: true do
   before do
-    login_data = {
-      strategy: 'github',
-      data: {
-        name: "Jon Rogozen",
-        email: "jon.rogozen@gmail.com",
-        uid: 1337
-      }
-    }
-    
-    mock_login(login_data)
+    mock_login
     adminify(User.first)
   end
 
@@ -28,6 +19,6 @@ feature "Create new post", js: true do
     click_on 'New Post'
     fill_in "content", with: "this won't work"
     click_on "Create"
-    expect(page).to have_content("Oops, you forgot to add a name for the post")
+    expect(page).to have_content("Name can't be blank")
   end
 end

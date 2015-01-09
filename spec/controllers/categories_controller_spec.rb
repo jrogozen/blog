@@ -125,7 +125,7 @@ RSpec.describe CategoriesController, :type => :controller do
       end
     end
 
-    context "category doesn't exit" do
+    context "category doesn't exist" do
       let(:id) { 2 }
 
       it "should 422" do
