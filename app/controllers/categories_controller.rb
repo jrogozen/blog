@@ -2,7 +2,13 @@ class CategoriesController < ApplicationController
   def index
     @categories = Category.all
     if @categories.length
-      render json: @categories
+      categories = []
+      @categories.each do |cat|
+        obj = cat.attributes
+        obj["posts"] = Post.where(category_id: obj["id"]).order(:id)
+        categories << obj
+      end
+      render json: categories
     else
       render json: {errors: "No categories found"}, status: 422
     end

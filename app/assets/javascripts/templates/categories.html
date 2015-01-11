@@ -4,10 +4,17 @@
       <h1>All Categories</h1>
       <ul>
         <li ng-repeat="category in categories">
-          <article class="article-content">
+          <section class="category">
             <h2><a ng-href="/categories/{{category.id}}">{{category.name}}</a></h2>
             {{category.content}}
-          </article>
+            <ul>
+              <li ng-repeat="post in category.posts">
+                <article class="post-tile">
+                  {{post.name}}
+                </article>
+              </li>
+            </ul>
+          </section>
         </li>
       </ul> 
     </section>

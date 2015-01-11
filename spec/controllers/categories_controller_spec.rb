@@ -12,6 +12,8 @@ RSpec.describe CategoriesController, :type => :controller do
       Category.create!(name: 'Javascript', id: 1)
       Category.create!(name: 'Ruby', id: 2)
 
+      Post.create!(name: "Learn JS", category_id: 1)
+      Post.create!(name: "JS Tricks!", category_id: 1)
       get :index
     end
 
@@ -28,6 +30,11 @@ RSpec.describe CategoriesController, :type => :controller do
 
       it "should include 'Javascript'" do
         expect(results.first["name"]).to eq("Javascript")
+      end
+
+      it "includes all posts in Category" do 
+        expect(results.first["posts"].size).to eq(2)
+        expect(results.first["posts"].first["name"]).to eq("Learn JS")
       end
     end
   end
