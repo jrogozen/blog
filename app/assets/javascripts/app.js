@@ -51,10 +51,6 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
       }
     }
   })
-  // .when('/categories/:id', {
-  //   templateUrl: "showCategory.html",
-  //   controller: "CategoryController"
-  // })
   .when('/sign_in', {
     templateUrl: "newUserSession.html",
     controller: "UserSessionsController"
