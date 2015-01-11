@@ -38,7 +38,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
       }
     }
   })
-  .when('/categories', {
+  .when('/categories/', {
     templateUrl: "categories.html",
     controller: 'CategoriesController'
   })

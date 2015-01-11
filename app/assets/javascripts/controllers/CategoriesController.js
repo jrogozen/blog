@@ -1,7 +1,15 @@
-app.controller('CategoriesController', ['$scope', '$routeParams', '$location', '$resource', 'Category', function($scope, $routeParams, $location, $resource, Category) {
+app.controller('CategoriesController', ['$scope', '$routeParams', '$location', '$resource', '$anchorScroll', 'Category', function($scope, $routeParams, $location, $resource, $anchorScroll, Category) {
 
   Category.setup();
 
   $scope.categories = Category.models.categories
+
+  $scope.scrollTo = function(id) {
+    console.log('scrolling to ' + id);
+    var old = $location.hash();
+    $location.hash(id);
+    $anchorScroll();
+    $location.hash(old);
+  }
   
 }]);

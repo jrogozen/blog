@@ -1,16 +1,23 @@
 <div class="container">
   <section class="row"> 
     <section class="content">
+      <nav class="local-nav categories-list">
+        <ul class="list-unstyled">
+          <li ng-repeat="category in categories">
+            <span ng-click="scrollTo(category.name);">{{category.name}}</span>
+          </li>
+        </ul>
+      </nav>
       <h1>All Categories</h1>
       <ul>
         <li ng-repeat="category in categories">
           <section class="category">
-            <h2><a ng-href="/categories/{{category.id}}">{{category.name}}</a></h2>
+            <h1 id="{{category.name}}">{{category.name}}</h1>
             {{category.content}}
             <ul>
               <li ng-repeat="post in category.posts">
                 <article class="post-tile">
-                  {{post.name}}
+                  <h2>{{post.name}}</h2>
                 </article>
               </li>
             </ul>

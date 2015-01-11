@@ -1,4 +1,4 @@
-app.controller("CategoryController", ['$scope', '$routeParams', '$resource', 'Category', 'Post', 'flash', function($scope, $routeParams, $resource, Category, Post, flash) {
+app.controller("CategoryController", ['$scope', '$routeParams', '$resource', '$anchorScroll', 'Category', 'Post', 'flash', function($scope, $routeParams, $resource, $anchorScroll, Category, Post, flash) {
  
   if ($routeParams.id) {
     $scope.category = Category.currentCategory($routeParams.id);
