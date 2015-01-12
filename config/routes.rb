@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     
     resources :posts, only: [:index, :create, :show, :update, :destroy]
     resources :categories, only: [:index, :create, :show, :destroy]
+    resources :comments, only: [:index]
 
     mount_devise_token_auth_for 'User', at: '/auth'
   end
