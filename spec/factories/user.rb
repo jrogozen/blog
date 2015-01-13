@@ -9,6 +9,7 @@ FactoryGirl.define do
     factory :confirmed_admin_user do
       confirmed_at Time.zone.now
       admin true
+      id 1
     end
 
     factory :confirmed_user do
