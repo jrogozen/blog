@@ -36,6 +36,31 @@ RSpec.describe CommentsController, :type => :controller do
     end
   end
 
+  describe "DELETE destroy" do
+    before do
+      Comment.create!(content: "My first comment.", post_id: 1, user_id: 1, id: 1)
+      delete :destroy, id: id
+    end
+
+    subject(:results) { JSON.parse(response.body) }
+
+    context "when comment exists" do
+      let(:id) { 1 }
+
+      it "should 200" do
+        expect(response.status).to eq(200)
+      end
+    end
+
+    context "when comment doesn't exist" do
+      let(:id) { 3 }
+
+      it "should 422" do
+        expect(response.status).to eq(422)
+      end
+    end
+  end
+
   describe "POST create" do
     before do
       Post.create!(name: "Learn JS", category_id: 1, id: 1)

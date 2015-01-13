@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
   end
 
   def create
-    comment_check = commentable?(comments_params)
+    comment_check = Comment.commentable?(comments_params)
     if comment_check.length > 0
       render json: {errors: comment_check}, status: 422
     elsif !current_user
@@ -26,14 +26,20 @@ class CommentsController < ApplicationController
     end
   end
 
-  private
-
-  def commentable?(data)
-    errors = []
-    errors << "Post does not exist" if !Post.find_by(id: data["post_id"])
-    errors << "No content to add to comment" if !data["content"]
-    return errors
+  def destroy
+    if current_user && current_user.admin
+      if Comment.find_by(id: params["id"])
+        Comment.destroy(params["id"])
+        render json: {success: "Comment deleted"}, status: 200
+      else
+        render json: {errors: ["Comment not found"]}, status: 422
+      end
+    else
+      render json: {errors: ["Must be an admin"]}, status: 422
+    end
   end
+
+  private
 
   def comments_params
     params.require(:comment).permit(:content, :post_id)
