@@ -1,7 +1,9 @@
-app.controller("PostController", ['$scope', '$routeParams', '$resource', 'Post', 'Category', 'flash', function($scope, $routeParams, $resource, Post, Category, flash) {
+app.controller("PostController", ['$scope', '$routeParams', '$resource', 'Post', 'Category', 'Comment', 'flash', function($scope, $routeParams, $resource, Post, Category, Comment, flash) {
  
   if ($routeParams.id) {
+    Comment.setup($routeParams.id);
     $scope.post = Post.currentPost($routeParams.id);
+    $scope.comments = Comment.models.comments;
   } else {
     Category.setup();
     $scope.categories = Category.models.categories;

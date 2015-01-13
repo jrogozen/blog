@@ -14,6 +14,7 @@ module AuthHelper
   end
 
   def adminify(user)
+    user.id = 1
     user.admin = true
     user.save
   end

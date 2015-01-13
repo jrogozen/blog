@@ -33,13 +33,17 @@ RSpec.describe CommentsController, :type => :controller do
       it "includes the correct user" do
         expect(results.first["user_id"]).to eq(1)
       end
+
+      it "includes user's name" do
+        expect(results.first["user_name"]).to eq("Jon Rogozen")
+      end
     end
   end
 
   describe "DELETE destroy" do
     before do
       Comment.create!(content: "My first comment.", post_id: 1, user_id: 1, id: 1)
-      delete :destroy, id: id
+      delete :destroy, post_id: 1, id: id
     end
 
     subject(:results) { JSON.parse(response.body) }
@@ -64,7 +68,7 @@ RSpec.describe CommentsController, :type => :controller do
   describe "POST create" do
     before do
       Post.create!(name: "Learn JS", category_id: 1, id: 1)
-      post :create, comment: {content: "My first comment", post_id: post_id}
+      post :create, post_id: post_id, comment: {content: "My first comment", post_id: post_id}
     end
 
     subject(:results) { JSON.parse(response.body) }

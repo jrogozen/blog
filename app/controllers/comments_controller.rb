@@ -1,8 +1,17 @@
 class CommentsController < ApplicationController
   def index
     begin
+      comments = []
+
       @post = Post.find(params["post_id"])
-      render json: @post.comments
+
+      @post.comments.each do |com|
+        comment = com.attributes
+        comment["user_name"] = User.find(com.user_id).name
+        comments << comment
+      end
+      
+      render json: comments
     rescue
       render json: {errors: @posts.errors.full_messages}, status: 422
     end

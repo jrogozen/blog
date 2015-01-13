@@ -13,6 +13,19 @@
         <p class="category">posted in {{post.category.name}}</p>
         {{post.content}}
       </article>
-    </div>
+
+      <div class="comments-container">
+        <ul class="list-unstyled comments">
+          <li ng-repeat="comment in comments">
+            <div class="author">
+              <h3>@{{comment.user_name}}</h3>
+            </div>
+            <div class="comment">
+              {{comment.content}}
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
   </section>
 </div>
