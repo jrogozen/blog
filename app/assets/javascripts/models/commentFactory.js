@@ -20,6 +20,8 @@ app.factory('Comment', ['$resource', '$route', '$location', 'Post', 'flash', fun
     comment.save(comment_obj, function(successResult) {
       flash.success = "Comment posted!"
       $route.reload();
+    }, function(errorResult) {
+      flash.error = errorResult.data.errors.join(", ");
     });
   };
 
@@ -31,6 +33,8 @@ app.factory('Comment', ['$resource', '$route', '$location', 'Post', 'flash', fun
     comment.delete(comment_obj, function(successResult) {
       flash.success = "Comment deleted!"
       $route.reload();
+    }, function(errorResult) {
+      flash.error = errorResult.data.errors.join(", ");
     });
   };
 
