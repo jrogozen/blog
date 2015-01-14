@@ -11,5 +11,9 @@ app.controller('CategoriesController', ['$scope', '$routeParams', '$location', '
     $anchorScroll();
     $location.hash(old);
   }
+
+  $scope.deleteCategory = function(catId) {
+    Category.deleteCategory(catId);
+  };
   
 }]);

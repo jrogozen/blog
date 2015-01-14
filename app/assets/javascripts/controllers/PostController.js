@@ -28,4 +28,12 @@ app.controller("PostController", ['$scope', '$routeParams', '$resource', 'Post',
     Post.deletePost(postId);
   }
 
+  $scope.addComment = function(comment) {
+    Comment.addComment(comment, $routeParams.id);
+  }
+
+  $scope.deleteComment = function(commentId) {
+    Comment.deleteComment(commentId, $routeParams.id);
+  }
+
 }]);

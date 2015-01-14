@@ -24,14 +24,14 @@ app.factory('Category', ['$resource', '$location', 'flash', function($resource, 
     });
   };
 
-  // deletePost = function(postId) {
-  //   post.delete({id: postId}, function(successResult) {
-  //     $location.path('/');
-  //     flash.success = "Post deleted succesffully."
-  //   }, function(errorResult) {
-  //     flash.error = "Error deleting post.";
-  //   });
-  // };
+  deleteCategory = function(catId) {
+    category.delete({id: catId}, function(successResult) {
+      $location.path('/');
+      flash.success = "Category deleted succesffully."
+    }, function(errorResult) {
+      flash.error = "Error deleting category.";
+    });
+  };
 
   getCategory = function(catId) {
     return category.get({id: catId});
@@ -46,6 +46,7 @@ app.factory('Category', ['$resource', '$location', 'flash', function($resource, 
     models: models,
     addCategory: addCategory,
     getCategory: getCategory,
-    getDefaultId: getDefaultId
+    getDefaultId: getDefaultId,
+    deleteCategory: deleteCategory
   };
 }]);

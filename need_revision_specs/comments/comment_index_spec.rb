@@ -1,9 +1,5 @@
 require "rails_helper"
 
-# create post and its comments
-# view post
-# see comments
-
 feature "Render Comments on Post Page", js: true do
   before do
     mock_login

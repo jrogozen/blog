@@ -15,10 +15,19 @@
       </article>
 
       <div class="comments-container">
+        <section ng-show="user.id" class="add-comment">
+          <h1>Add Comment</h1>
+          <form ng-submit="addComment(comment)">
+            <div class="form-group">
+              <textarea name="content" class="form-control" ng-model="comment.content"></textarea>
+            </div>
+            <input type="submit" class="btn btn-primary">
+          </form>
+        </section>
         <ul class="list-unstyled comments">
           <li ng-repeat="comment in comments">
             <div class="author">
-              <h3>@{{comment.user_name}}</h3>
+              <h3>@{{comment.user_name}} <button class="btn btn-danger btn-xs" ng-show="user.admin" ng-click="deleteComment(comment.id)">delete</button></h3>
             </div>
             <div class="comment">
               {{comment.content}}

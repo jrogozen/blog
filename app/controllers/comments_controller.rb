@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
         comments << comment
       end
       
-      render json: comments
+      render json: comments.reverse
     rescue
       render json: {errors: @posts.errors.full_messages}, status: 422
     end

@@ -8,7 +8,7 @@ require 'rspec/its'
 require 'capybara/rspec'
 require 'capybara/webkit/matchers'
 Dir[File.dirname(__FILE__) + '/support/*.rb'].each {|file| require file }
-Capybara.javascript_driver = :webkit
+Capybara.javascript_driver = :selenium
 
 OmniAuth.config.test_mode = true
 

@@ -3,10 +3,10 @@ module AuthHelper
 
   def mock_login
     OmniAuth.config.add_mock(:github, {
-      :uid => "1337",
-      :info => {
-        :name => "Jon Rogozen",
-        :email => "jonrogozen@gmail.com"
+      'uid' => "1337",
+      'info' => {
+        'name' => "Jon Rogozen",
+        'email' => "jonrogozen@gmail.com"
       }
     })
     visit "/sign_in"
@@ -14,6 +14,7 @@ module AuthHelper
   end
 
   def adminify(user)
+    binding.pry
     user.id = 1
     user.admin = true
     user.save

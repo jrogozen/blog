@@ -4,7 +4,7 @@
       <nav class="local-nav categories-list">
         <ul class="list-unstyled">
           <li ng-repeat="category in categories">
-            <span ng-click="scrollTo(category.name);">{{category.name}}</span>
+            <a ng-click="scrollTo(category.name);">{{category.name}}</a>
           </li>
         </ul>
       </nav>
@@ -12,8 +12,8 @@
       <ul>
         <li ng-repeat="category in categories">
           <section class="category">
-            <h1 id="{{category.name}}">{{category.name}}</h1>
-            {{category.content}}
+            <h1 id="{{category.name.toLowerCase()}}">{{category.name}} <button class="btn btn-danger delete" ng-show="user.admin" ng-click="deleteCategory(category.id)">delete</button></h1>
+            
             <ul>
               <li ng-repeat="post in category.posts">
                 <article class="post-tile">
